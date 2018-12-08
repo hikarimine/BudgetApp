@@ -104,6 +104,18 @@ var UIController = (function () {
             document.querySelector(element).insertAdjacentHTML('beforeend'.newHTML);
         },
         
+        clearField: function(){
+            var fields, fieldsArr;
+            
+            document.querySelectorAll(DOMstrings.inputDescription + ", "+ DOMstrings.inputValue);
+            
+            fieldsArr = Array.prototype.slice.call(fields);
+            
+            fieldsArr.forEach(function(current, index, array) {
+                current.value = "";
+            });
+        },
+
         getDOMstrings: function(){
             return DOMstrings;
         }
@@ -114,32 +126,38 @@ var UIController = (function () {
 
 var controller = (function (budgetCtrl, UICtrl) {
     
-    var setupEventListeners = function(){
+    var setupEventListeners = function () {
         var DOM = UICtrl.getDOMstrings();
-        
-        document.querySelector(DOM.inputButtom).addEventListener("click", ctrlAddItem);
-    
-        document.addEventListener("keypress", function(event){
-        
-            if(event.keyCode === 13){
+
+        document.querySelector(DOM.inputBtn).addEventListener('click', ctrlAddItem);
+
+        document.addEventListener('keypress', function (event) {
+            if (event.keyCode === 13 || event.which === 13) {
                 ctrlAddItem();
-            }   
-        
-        })
+            }
+        });
+
+        document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem);
+
+        document.querySelector(DOM.inputType).addEventListener('change', UICtrl.changedType);
     };
-        
+
     
      var ctrlAddItem = function(){
          var input, newItem;
          
         //1. get the field input data
         input = UICtrl.getInput();
-         
+
         //2. add the item to the budget controller 
         newItem = budgetCtrl.addItem(input.type, input.description, input.value);
          
         //3. add the item to the UI
         UICtrl.addListItem(newItem, input.type);
+         
+         //clear the fields
+         UICtrl.clearFields();
+         
         //4. calculate the budget
         
         //5. display the budget on the UI
