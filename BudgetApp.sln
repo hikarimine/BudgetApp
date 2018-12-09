@@ -6,6 +6,8 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{19DC9DFC-BCA2-4984-937B-2C6998D33C8C}"
 	ProjectSection(SolutionItems) = preProject
 		app.js = app.js
+		..\..\..\..\Desktop\back.png = ..\..\..\..\Desktop\back.png
+		..\..\..\..\Desktop\budgetapp.jpg = ..\..\..\..\Desktop\budgetapp.jpg
 		index.html = index.html
 		style.css = style.css
 	EndProjectSection
